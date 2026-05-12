@@ -1,43 +1,45 @@
-def currency_converter():
-    # Актуальные курсы (условно)
-    rates = {
-        "USD": 92.50,
-        "EUR": 101.20,
-        "CNY": 12.80   # Добавили Юань для разнообразия
-    }
+import tkinter as tk
+from tkinter import messagebox
 
-    print("=== Приложение 'Супер-Обменник' ===")
-    print("Доступные валюты: USD, EUR, CNY")
-    print("Введите 'выход', чтобы завершить работу.")
+def convert():
+    try:
+        rub = float(entry_rub.get())
+        currency = var.get()
+        rates = {"USD": 92.50, "EUR": 101.20, "CNY": 12.80}
+        
+        result = rub / rates[currency]
+        label_result.config(text=f"Результат: {result:.2f} {currency}", fg="#27ae60")
+    except ValueError:
+        messagebox.showerror("Ошибка", "Введите корректное число!")
 
-    while True:
-        print("\n" + "-"*30)
-        user_input = input("Какую валюту покупаем? (или 'выход'): ").upper()
+# Создаем главное окно
+root = tk.Tk()
+root.title("Super Converter")
+root.geometry("300x400")
+root.configure(bg="#f0f3f5")
 
-        if user_input == "ВЫХОД":
-            print("До свидания! Хорошего дня.")
-            break
+# Заголовок
+tk.Label(root, text="Сумма в рублях:", bg="#f0f3f5", font=("Arial", 10)).pack(pady=10)
 
-        if user_input not in rates:
-            print(f"Ошибка: Валюта '{user_input}' не поддерживается.")
-            continue
+# Поле ввода
+entry_rub = tk.Entry(root, font=("Arial", 14), justify='center')
+entry_rub.pack(pady=5)
 
-        try:
-            rub_amount = float(input(f"Сколько грн меняем на {user_input}? "))
-            
-            if rub_amount < 0:
-                print("Ошибка: Сумма не может быть отрицательной!")
-                continue
+# Выбор валюты (выпадающий список или радиокнопки)
+var = tk.StringVar(value="USD")
+tk.Label(root, text="Выберите валюту:", bg="#f0f3f5").pack(pady=10)
 
-            # Расчет
-            rate = rates[user_input]
-            result = rub_amount / rate
-            
-            print(f"✅ Готово! Вы получаете: {result:.2f} {user_input}")
-            print(f"Курс: 1 {user_input} = {rate} грн.")
+for curr in ["USD", "EUR", "CNY"]:
+    tk.Radiobutton(root, text=curr, variable=var, value=curr, bg="#f0f3f5").pack()
 
-        except ValueError:
-            print("Ошибка: Введите корректное число (например, 500 или 150.50).")
+# Кнопка конвертации
+btn_convert = tk.Button(root, text="Конвертировать", command=convert, 
+                       bg="#3498db", fg="white", font=("Arial", 12, "bold"), 
+                       padx=20, pady=10, relief="flat")
+btn_convert.pack(pady=20)
 
-if __name__ == "__main__":
-    currency_converter()
+# Поле для результата
+label_result = tk.Label(root, text="Результат: 0.00", bg="#f0f3f5", font=("Arial", 12, "bold"))
+label_result.pack(pady=10)
+
+root.mainloop()
