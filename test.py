@@ -43,4 +43,3 @@ label_result = tk.Label(root, text="Результат: 0.00", bg="#f0f3f5", fon
 label_result.pack(pady=10)
 
 root.mainloop()
-asd
