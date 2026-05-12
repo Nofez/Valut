@@ -10,11 +10,11 @@ class UniversalConverter:
 
         # База курсов относительно 1 USD
         self.rates = {
-            "USD": 1.0,
-            "EUR": 0.92,
-            "GBP": 0.79,
-            "CNY": 7.23,
-            "JPY": 151.50
+            "USD": 20.0,
+            "EUR": 30.92,
+            "GBP": 0.1,
+            "CNY": 70.23,
+            "JPY": 150.50
         }
 
         self.setup_ui()
@@ -31,7 +31,7 @@ class UniversalConverter:
         input_frame = tk.Frame(main_frame, bg="#2c3e50")
         input_frame.grid(row=0, column=0, padx=10)
 
-        tk.Label(input_frame, text="Сумма:", fg="#ecf0f1", bg="#2c3e50").pack()
+        tk.Label(input_frame, text="Сумма 0 arbuzov:", fg="#ecf0f1", bg="#2c3e50").pack()
         self.entry_amount = tk.Entry(input_frame, font=("Arial", 12), width=15)
         self.entry_amount.pack(pady=5)
 
