@@ -10,7 +10,7 @@ def convert():
         result = rub / rates[currency]
         label_result.config(text=f"Результат: {result:.2f} {currency}", fg="#27ae60")
     except ValueError:
-        messagebox.showerror("Ошибка", "Введите корректное число!")
+        messagebox.showerror("Ошибка", "Введите корректное число чтобы получить коня!")
 
 # Создаем главное окно
 root = tk.Tk()
